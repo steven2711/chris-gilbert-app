@@ -32,6 +32,7 @@ anchor.addEventListener("markerFound", (e) => {
   if (btnCheck && btn.innerText === "Laugh On") {
     sound.play();
   } else if (!btnCheck) {
+    sound = new Audio("chris-gilbert-laugh.mp3");
     sound.play();
   }
 });
