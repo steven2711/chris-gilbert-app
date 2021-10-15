@@ -18,7 +18,7 @@ const ios = document.getElementById("ios");
 let sound = null;
 let clickEvent = new Event("click");
 
-ios.addEventListener("click", (e) => {
+body.addEventListener("click", (e) => {
   console.log(e.isTrusted);
   sound = new Audio("chris-gilbert-laugh.mp3");
   sound.play();
