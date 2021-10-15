@@ -1,19 +1,21 @@
 const anchor = document.getElementById("anchor");
 const body = document.getElementById("body");
+const ios = document.getElementById("ios");
 
 const sound = new Audio("chris-gilbert-laugh.mp3");
-// let clickEvent = new Event("click");
-// clickEvent.isTrusted = true;
+let clickEvent = new Event("click");
 
-body.addEventListener("click", (e) => {
+ios.addEventListener("click", (e) => {
   sound.play();
 });
 
 anchor.addEventListener("markerFound", (e) => {
-  sound.play();
-  console.log("played sound");
-  anchor.addEventListener("markerLost", (e) => {
-    sound.pause();
-    console.log("paused sound");
-  });
+  // sound.play();
+  // console.log("played sound");
+  // anchor.addEventListener("markerLost", (e) => {
+  //   sound.pause();
+  //   console.log("paused sound");
+  // });
+
+  ios.dispatchEvent(clickEvent);
 });
