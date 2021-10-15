@@ -1,7 +1,9 @@
 const anchor = document.getElementById("anchor");
 const ios = document.getElementById("ios");
 const btnBox = document.getElementById("btnBox");
+
 let sound = null;
+let btnCheck = null;
 
 let btn = document.createElement("button");
 btn.innerText = "Laugh Off";
@@ -23,10 +25,13 @@ btn.addEventListener("click", (e) => {
 
 if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   btnBox.appendChild(btn);
+  btnCheck = true;
 }
 
 anchor.addEventListener("markerFound", (e) => {
-  if (btn.innerText === "Laugh On") {
+  if (btnCheck && btn.innerText === "Laugh On") {
+    sound.play();
+  } else if (!btnCheck) {
     sound.play();
   }
 });
