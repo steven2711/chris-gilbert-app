@@ -1,39 +1,36 @@
-// Element.prototype._addEventListener = Element.prototype.addEventListener;
-// Element.prototype.addEventListener = function () {
-//   let args = [...arguments];
-//   let temp = args[1];
-//   args[1] = function () {
-//     let args2 = [...arguments];
-//     args2[0] = Object.assign({}, args2[0]);
-//     args2[0].isTrusted = true;
-//     return temp(...args2);
-//   };
-//   return this._addEventListener(...args);
-// };
-
 const anchor = document.getElementById("anchor");
-const body = document.getElementById("body");
 const ios = document.getElementById("ios");
-
+const btnBox = document.getElementById("btnBox");
 let sound = null;
-let clickEvent = new Event("click");
 
-body.addEventListener("click", (e) => {
+let btn = document.createElement("button");
+btn.innerText = "Laugh Off";
+btn.style.padding = "1rem";
+btn.style.color = "white";
+btn.style.background = "red";
+btn.style.borderRadius = "10px";
+btn.style.border = "none";
+btn.id = "laugh";
+btn.addEventListener("click", (e) => {
+  console.log("click");
   sound = new Audio("chris-gilbert-laugh.mp3");
+
+  if (e.target.outerText === "Laugh Off") {
+    btn.innerText = "Laugh On";
+    btn.style.background = "blue";
+  }
 });
 
-anchor.addEventListener("markerFound", (e) => {
-  // sound = new Audio("chris-gilbert-laugh.mp3");
-  sound.play();
+if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  btnBox.appendChild(btn);
+}
 
-  // sound.play();
-  // console.log("played sound");
-  // anchor.addEventListener("markerLost", (e) => {
-  //   sound.pause();
-  //   console.log("paused sound");
-  // });
-  // ios.dispatchEvent(clickEvent);
+anchor.addEventListener("markerFound", (e) => {
+  if (btn.innerText === "Laugh On") {
+    sound.play();
+  }
 });
 
 // ios user event workaround
-// https://stackoverflow.com/questions/49518959/javascript-trigger-an-inputevent-istrusted-true
+// you have to initiate a user event before having access to the Audio context
+// solved by creating a button for ios users to press

@@ -29,6 +29,14 @@
         width: 15rem;
       }
 
+      .ios {
+        height: 1rem;
+        width: 1rem;
+        background-color: black;
+        z-index: 20;
+        color: white;
+      }
+
       .arjs-loader div {
         text-align: center;
         font-size: 1.25em;
@@ -63,10 +71,20 @@
         smoothThreshold="5"
       >
       </a-nft>
-
+      <div
+        id="btnBox"
+        style="
+          position: fixed;
+          bottom: 10px;
+          left: 10px;
+          width: 100%;
+          text-align: center;
+          z-index: 1;
+        "
+      ></div>
       <a-entity camera></a-entity>
     </a-scene>
-    <div id="ios"></div>
+
     <script src="app.js" type="text/javascript"></script>
   </body>
 </html>
