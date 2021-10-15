@@ -18,20 +18,23 @@ const ios = document.getElementById("ios");
 const sound = new Audio("chris-gilbert-laugh.mp3");
 let clickEvent = new Event("click");
 
-// ios.addEventListener("click", (e) => {
-//   sound.play();
-// });
+ios.addEventListener("click", (e) => {
+  console.log(e.isTrusted);
+  sound.play();
+});
 
 anchor.addEventListener("markerFound", (e) => {
   console.log(e.isTrusted);
 
-  sound.play();
+  // sound.play();
   // console.log("played sound");
   // anchor.addEventListener("markerLost", (e) => {
   //   sound.pause();
   //   console.log("paused sound");
   // });
-  // ios.dispatchEvent(clickEvent);
+  ios.dispatchEvent(clickEvent);
+
+  console.log(ios.dispatchEvent);
 });
 
 // ios user event workaround
