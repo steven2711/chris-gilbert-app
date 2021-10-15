@@ -12,6 +12,8 @@
       .arjs-loader {
         height: 100%;
         width: 100%;
+        display: flex;
+        flex-direction: column;
         position: absolute;
         top: 0;
         left: 0;
@@ -20,6 +22,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      p {
+        color: white;
+        width: 15rem;
       }
 
       .arjs-loader div {
@@ -34,12 +41,16 @@
     <!-- minimal loader shown until image descriptors are loaded -->
     <div class="arjs-loader">
       <div>Loading, please wait...</div>
+      <p>
+        Once loaded, place camera over the image of Chris. You may have to get
+        close. If something is wrong, try refreshing
+      </p>
     </div>
     <a-scene
       vr-mode-ui="enabled: false;"
       renderer="logarithmicDepthBuffer: true;"
       embedded
-      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: true;"
+      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
     >
       <!-- Asset Management -->
       <a-nft
