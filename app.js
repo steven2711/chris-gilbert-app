@@ -15,16 +15,19 @@ const anchor = document.getElementById("anchor");
 const body = document.getElementById("body");
 const ios = document.getElementById("ios");
 
-const sound = new Audio("chris-gilbert-laugh.mp3");
+let sound = null;
 let clickEvent = new Event("click");
 
 ios.addEventListener("click", (e) => {
   console.log(e.isTrusted);
+  sound = new Audio("chris-gilbert-laugh.mp3");
   sound.play();
 });
 
 anchor.addEventListener("markerFound", (e) => {
   console.log(e.isTrusted);
+  // sound = new Audio("chris-gilbert-laugh.mp3");
+  // sound.play();
 
   // sound.play();
   // console.log("played sound");
@@ -33,8 +36,6 @@ anchor.addEventListener("markerFound", (e) => {
   //   console.log("paused sound");
   // });
   ios.dispatchEvent(clickEvent);
-
-  console.log(ios.dispatchEvent);
 });
 
 // ios user event workaround
