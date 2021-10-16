@@ -33,7 +33,12 @@ anchor.addEventListener("markerFound", async (e) => {
         isPlaying = false;
       }
     } else if (!isIOS) {
-      await playSound(sound);
+      isPlaying = true;
+      const test = await playSound(sound);
+
+      if (test.type === "ended") {
+        isPlaying = false;
+      }
     }
   }
 });
