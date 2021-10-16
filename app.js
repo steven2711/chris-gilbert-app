@@ -13,6 +13,8 @@ let btn = createButton(audioFiles[0]);
 if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   btnBox.appendChild(btn);
   isIOS = true;
+} else {
+  sound = new Audio("chris-gilbert-laugh.mp3");
 }
 
 anchor.addEventListener("markerFound", async (e) => {
@@ -22,7 +24,6 @@ anchor.addEventListener("markerFound", async (e) => {
   if (isIOS && btn.innerText === "Sound On") {
     await playSound(sound);
   } else if (!isIOS) {
-    sound = new Audio("chris-gilbert-laugh.mp3");
     await playSound(sound);
   }
 });
