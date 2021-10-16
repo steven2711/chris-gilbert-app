@@ -6,6 +6,7 @@ const audioFiles = ["audio/chris-gilbert-laugh.mp3", "audio/chris-singing.mp3"];
 
 let sound = null;
 let isIOS = null;
+let isPlaying = false;
 
 // Load btn with default sound track
 let btn = createButton(audioFiles[0]);
@@ -17,14 +18,23 @@ if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   sound = new Audio("chris-gilbert-laugh.mp3");
 }
 
-anchor.addEventListener("markerFound", async (e) => {
-  const randomNumber = randomInteger(0, audioFiles.length - 1);
-  sound.src = audioFiles[randomNumber];
+console.log(isPlaying);
 
-  if (isIOS && btn.innerText === "Sound On") {
-    await playSound(sound);
-  } else if (!isIOS) {
-    await playSound(sound);
+anchor.addEventListener("markerFound", async (e) => {
+  if (!isPlaying) {
+    const randomNumber = randomInteger(0, audioFiles.length - 1);
+    sound.src = audioFiles[randomNumber];
+
+    if (isIOS && btn.innerText === "Sound On") {
+      isPlaying = true;
+      const test = await playSound(sound);
+
+      if (test.type === "ended") {
+        isPlaying = false;
+      }
+    } else if (!isIOS) {
+      await playSound(sound);
+    }
   }
 });
 
