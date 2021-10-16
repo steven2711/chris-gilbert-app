@@ -2,38 +2,28 @@ const anchor = document.getElementById("anchor");
 const ios = document.getElementById("ios");
 const btnBox = document.getElementById("btnBox");
 
+const audioFiles = ["audio/chris-gilbert-laugh.mp3", "audio/chris-singing.mp3"];
+
 let sound = null;
-let btnCheck = null;
+let isIOS = null;
 
-let btn = document.createElement("button");
-btn.innerText = "Laugh Off";
-btn.style.padding = "1rem";
-btn.style.color = "white";
-btn.style.background = "red";
-btn.style.borderRadius = "10px";
-btn.style.border = "none";
-btn.id = "laugh";
-btn.addEventListener("click", (e) => {
-  console.log("click");
-  sound = new Audio("chris-gilbert-laugh.mp3");
-
-  if (e.target.outerText === "Laugh Off") {
-    btn.innerText = "Laugh On";
-    btn.style.background = "blue";
-  }
-});
+// Load btn with default sound track
+let btn = createButton(audioFiles[0]);
 
 if (/webOS|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   btnBox.appendChild(btn);
-  btnCheck = true;
+  isIOS = true;
 }
 
-anchor.addEventListener("markerFound", (e) => {
-  if (btnCheck && btn.innerText === "Laugh On") {
-    sound.play();
-  } else if (!btnCheck) {
+anchor.addEventListener("markerFound", async (e) => {
+  const randomNumber = randomInteger(0, audioFiles.length - 1);
+  sound.src = audioFiles[randomNumber];
+
+  if (isIOS && btn.innerText === "Sound On") {
+    await playSound(sound);
+  } else if (!isIOS) {
     sound = new Audio("chris-gilbert-laugh.mp3");
-    sound.play();
+    await playSound(sound);
   }
 });
 
